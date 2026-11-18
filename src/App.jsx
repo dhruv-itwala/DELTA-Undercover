@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, HelpCircle, RotateCcw, VenetianMask, Shield, Eye, Code2, Terminal } from 'lucide-react';
+import { Volume2, VolumeX, HelpCircle, RotateCcw, Shield, Eye, Code2, Terminal } from 'lucide-react';
 import Setup from './components/Setup/Setup';
 import PassReveal from './components/PassReveal/PassReveal';
 import Discussion from './components/Discussion/Discussion';
@@ -7,6 +7,8 @@ import Voting from './components/Voting/Voting';
 import RevealModal from './components/RevealModal/RevealModal';
 import GameOver from './components/GameOver/GameOver';
 import RulesModal from './components/RulesModal/RulesModal';
+import DeveloperModal from './components/DeveloperModal/DeveloperModal';
+import DeltaLogo from './components/Logo/DeltaLogo';
 import { getRandomWordPair } from './data/words';
 import { sound } from './utils/audio';
 import styles from './App.module.css';
@@ -21,6 +23,7 @@ export default function App() {
   const [eliminatedModalData, setEliminatedModalData] = useState(null);
   const [winner, setWinner] = useState(null); // 'civilians' | 'imposters'
   const [rulesOpen, setRulesOpen] = useState(false);
+  const [devModalOpen, setDevModalOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [lastGameConfig, setLastGameConfig] = useState(null);
 
@@ -37,9 +40,8 @@ export default function App() {
     setDevTapCount(nextCount);
     if (nextCount >= 3) {
       sound.play('click');
-      setShowDevCreditToast(true);
+      setDevModalOpen(true);
       setDevTapCount(0);
-      setTimeout(() => setShowDevCreditToast(false), 3500);
     }
     if (stage !== 'SETUP') {
       handleNewSetup();
@@ -186,22 +188,12 @@ export default function App() {
       {/* Mobile Top Navigation Bar */}
       <header className={styles.topBar}>
         <div 
-          className={styles.brand} 
           onClick={handleBrandClick}
           role="button"
           tabIndex={0}
           title="DELTA: Undercover"
         >
-          <div className={styles.logoBadge}>
-            <VenetianMask size={18} className={styles.logoIcon} />
-          </div>
-          <div className={styles.brandMeta}>
-            <div className={styles.brandTitleRow}>
-              <span className={styles.brandPrefix}>DELTA:</span>
-              <span className={styles.brandTitle}>Undercover</span>
-            </div>
-            <span className={styles.brandSub}>SOCIAL DEDUCTION PROTOCOL</span>
-          </div>
+          <DeltaLogo size="medium" showWordmark={true} />
         </div>
 
         <div className={styles.topActions}>
@@ -284,12 +276,14 @@ export default function App() {
       {/* Subtle Meta Developer Footer */}
       <footer 
         className={styles.metaFooter}
-        onClick={handleBrandClick}
-        title="DELTA Engine v2.4 • Architecture by Dhruv"
+        onClick={() => setDevModalOpen(true)}
+        role="button"
+        tabIndex={0}
+        title="Designed & Developed by DHRUV ITWALA • Tap for Credits"
       >
         <span>DELTA: Undercover</span>
         <span>•</span>
-        <span>Engine v2.4</span>
+        <span>By Dhruv Itwala</span>
       </footer>
 
       {/* Developer Toast Easter Egg */}
@@ -298,7 +292,7 @@ export default function App() {
           <Terminal size={14} className={styles.devToastIcon} />
           <div className={styles.devToastContent}>
             <span className={styles.devToastTitle}>DELTA PROTOCOL AUTHENTICATED</span>
-            <span className={styles.devToastMeta}>Architecture & Engineering by <strong>Dhruv</strong></span>
+            <span className={styles.devToastMeta}>Designed & Developed by <strong>DHRUV ITWALA</strong></span>
           </div>
         </div>
       )}
@@ -317,6 +311,11 @@ export default function App() {
       {/* Rules Modal */}
       {rulesOpen && (
         <RulesModal onClose={() => setRulesOpen(false)} />
+      )}
+
+      {/* Developer Credits Modal */}
+      {devModalOpen && (
+        <DeveloperModal onClose={() => setDevModalOpen(false)} />
       )}
     </div>
   );

@@ -45,6 +45,11 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 16px rgba(99, 102, 241, 0.25);
+  transition: transform 0.2s;
+}
+
+.brand:active .logoBadge {
+  transform: scale(0.9);
 }
 
 .logoIcon {
@@ -56,19 +61,34 @@
   flex-direction: column;
 }
 
-.brandTitle {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.brandTitleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
   line-height: 1.1;
 }
 
+.brandPrefix {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 12px var(--accent-cyan-glow);
+}
+
+.brandTitle {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #ffffff 40%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .brandSub {
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   color: var(--text-muted);
@@ -108,11 +128,80 @@
 .screenView {
   width: 100%;
   flex: 1;
-  padding: 14px 16px 28px;
+  padding: 14px 16px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   animation: fadeIn 0.25s ease-out;
+}
+
+/* Subtle Meta Footer */
+.metaFooter {
+  width: 100%;
+  padding: 8px 16px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.metaFooter:hover {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Hidden Developer Toast */
+.devToast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #090c12;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(99, 102, 241, 0.3);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 200;
+  animation: popScale 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.devToastIcon {
+  color: var(--accent-cyan);
+}
+
+.devToastContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.devToastTitle {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+}
+
+.devToastMeta {
+  font-size: 0.78rem;
+  color: #fff;
+}
+
+.devToastMeta strong {
+  color: var(--primary);
+  font-weight: 800;
 }
 
 @media (max-width: 480px) {

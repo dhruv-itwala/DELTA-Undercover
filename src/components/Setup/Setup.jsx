@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { WORD_PACKS } from '../../data/words';
 import { sound } from '../../utils/audio';
+import DeltaLogo from '../Logo/DeltaLogo';
 import styles from './Setup.module.css';
 
 const DEFAULT_NAMES = ['Player 1', 'Player 2', 'Player 3', 'Player 4'];
@@ -177,6 +178,9 @@ export default function Setup({ onStartGame }) {
       {currentStep === 1 && (
         <div className={styles.stepWrapper}>
           <div className={styles.stepHero}>
+            {/* <div className={styles.heroLogoWrap}>
+              <DeltaLogo variant="square" />
+            </div> */}
             <span className={styles.stepBadge}>Step 1 of 3</span>
             <h1 className={styles.stepHeading}>Player Selection</h1>
             <p className={styles.stepSub}>Add everyone who will be playing on this device.</p>

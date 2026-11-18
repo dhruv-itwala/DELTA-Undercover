@@ -1,36 +1,15 @@
-# 🕶️ Undercover: Imposter Word Game
+# 🕶️ DELTA: Undercover
 
-A mobile-first party deduction game built with **React + Vite + CSS Modules**.
+A sleek, mobile-first social deduction word party game built with **React + Vite + CSS Modules**.
 
-## 🎮 How to Play
+## 🎮 Game Concept
+In **DELTA: Undercover**, players are covert operatives connected in a circle on a single device.
+- **Civilians** receive Word A (e.g., *"Door"*).
+- **The Imposter** receives closely relatable Word B (e.g., *"Wardrobe"*).
+- Players give 1 short clue per turn.
+- A total countdown timer ticks down (1 min, 5 min, or 10 min). Once the timer hits 0:00, players are immediately sent to the Vote Out screen to eliminate the suspected imposter!
 
-1. **Setup**:
-   - Add 3 to 12 players (e.g. Player A, B, C, D).
-   - Choose the number of Imposters (1 or 2).
-   - Pick a curated word pack (Everyday Objects, Food & Drinks, Places, Tech, Animals) or enter your own custom word pair!
-
-2. **Secret Word Reveal (Pass & Play)**:
-   - Hand the device to each player in turn.
-   - Tap to reveal your secret word privately:
-     - **Civilians** receive Word A (e.g., *"Door"*).
-     - **The Imposter** receives a closely related Word B (e.g., *"Wardrobe"*) with a 🚨 *YOU ARE THE IMPOSTER* alert.
-   - Tap to hide again and pass the device to the next player.
-
-3. **Discussion Phase**:
-   - The game randomly designates who starts speaking.
-   - Going in turn order, each person gives a short clue or word describing their secret word without making it too obvious.
-   - Use the optional discussion timer to keep turns snappy!
-
-4. **Vote Out Phase**:
-   - When everyone has given their clues, tap **Proceed to Vote Out**.
-   - Select the player you suspect of being the Imposter and submit.
-   - A dramatic elimination reveal shows whether they were an Imposter or an innocent Civilian!
-
-5. **Win Conditions**:
-   - **Civilians Win**: If all imposters are eliminated.
-   - **Imposters Win**: If an innocent civilian is voted out and only 2 players remain (1 Civilian + 1 Imposter), the imposter steals the victory!
-
-## 🚀 Running Locally
+## 🚀 Quick Start
 
 ```bash
 # Install dependencies
@@ -39,15 +18,28 @@ npm install
 # Start development server
 npm run dev
 
-# Build production bundle
+# Production build
 npm run build
 ```
 
-## 🛠️ Tech Stack
-- **React 18**
-- **Vite**
-- **CSS Modules** (`*.module.css`)
-- **Lucide Icons**
-- **Canvas Confetti**
-- **Audio Engine**: Royalty-free public sound effects + instantaneous Web Audio API synth fallback.
+---
 
+## 👨💻 Developer Credits
+
+Designed and developed by **DHRUV ITWALA**:
+- **Portfolio**: [dhruv-itwala-portfolio.onrender.com](https://dhruv-itwala-portfolio.onrender.com/)
+- **GitHub**: [github.com/Dhruv-Itwala](https://github.com/Dhruv-Itwala)
+- **LinkedIn**: [linkedin.com/in/dhruv-itwala](https://www.linkedin.com/in/dhruv-itwala/)
+- **Instagram**: [instagram.com/itwala_dhruv](https://www.instagram.com/itwala_dhruv)
+- **WhatsApp**: [Connect on WhatsApp](https://api.whatsapp.com/send/?phone=9104438800&text&type=phone_number&app_absent=0)
+- **YouTube**: [youtube.com/@dhruvitwala](https://youtube.com/@dhruvitwala?si=81XhgXpErB6sjjx5)
+
+---
+
+## 🛠️ Stack & Engineering
+- **Framework**: React 18
+- **Tooling**: Vite
+- **Styling**: Pure CSS Modules (`*.module.css`) with pitch-black theme tokens
+- **Icons**: Lucide React (`lucide-react`)
+- **Sound Engine**: Public royalty-free SFX with Web Audio API synthesis fallback
+- **Effects**: Canvas Confetti

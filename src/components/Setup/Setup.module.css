@@ -587,3 +587,9 @@
 .launchBtn:hover {
   box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5);
 }
+.heroLogoWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
