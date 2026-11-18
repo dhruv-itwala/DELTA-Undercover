@@ -1,0 +1,504 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: slideUpFade 0.3s ease-out;
+}
+
+.backBtn {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.wifiBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-rose);
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.heroSub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.tabToggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 4px;
+}
+
+.tabBtn {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.82rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.tabActive {
+  background: var(--bg-card-hover);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.errorBox {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  color: #fda4af;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  animation: shakeGlitch 0.3s ease-in-out;
+}
+
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inputGroup label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.inputGroup input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.inputGroup input:focus {
+  border-color: var(--accent-rose);
+}
+
+.codeInput {
+  font-family: var(--font-display);
+  font-size: 1.4rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.2em !important;
+  text-align: center;
+  color: var(--accent-cyan) !important;
+}
+
+.hostNotice {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--accent-rose) 0%, #be123c 100%);
+  color: #fff;
+  font-size: 0.98rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px var(--accent-rose-glow);
+  letter-spacing: 0.02em;
+}
+
+/* Room Code Card */
+.roomCodeCard {
+  background: linear-gradient(135deg, rgba(14, 17, 24, 0.95) 0%, rgba(20, 26, 38, 0.9) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-cyan-glow);
+}
+
+.roomLabel {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+}
+
+.codeRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.codeDisplay {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+.copyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(6, 182, 212, 0.15);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--accent-cyan);
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.copyBtn:hover {
+  background: var(--accent-cyan);
+  color: #000;
+}
+
+.copyBtnSuccess {
+  background: var(--accent-emerald) !important;
+  color: #000 !important;
+  border-color: var(--accent-emerald) !important;
+}
+
+.shareHint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Roster */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cardIconCyan {
+  color: var(--accent-cyan);
+}
+
+.cardIconDanger {
+  color: var(--accent-rose);
+}
+
+.hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.rosterList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.rosterRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--bg-card-inner);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+}
+
+.rosterRowMe {
+  border-color: rgba(99, 102, 241, 0.35);
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.rosterInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pName {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.youBadge {
+  font-size: 0.6rem;
+  font-weight: 800;
+  background: var(--primary);
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.readyStatus {
+  font-size: 0.68rem;
+  color: var(--accent-emerald);
+}
+
+.hostBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* Settings in Host Lobby */
+.pillGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.pillBtn {
+  flex: 1;
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.2s;
+}
+
+.pillNumber {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.pillLabel {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.activePillDanger {
+  background: rgba(244, 63, 94, 0.15);
+  border-color: var(--accent-rose);
+  color: #fff;
+  box-shadow: 0 0 18px var(--accent-rose-glow);
+}
+
+.disabledPill {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pillLock {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.packSelectHeader {
+  margin-top: 4px;
+}
+
+.packGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.packBtn {
+  padding: 8px 10px;
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.activePack {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: var(--accent-cyan);
+  color: #fff;
+}
+
+.launchBtn {
+  margin-top: 6px;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--accent-emerald) 0%, #059669 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px var(--accent-emerald-glow);
+}
+
+/* Guest Waiting Card */
+.waitingCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-card);
+}
+
+.waitingRadar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+}
+
+.spinIcon {
+  animation: radarSpin 4s linear infinite;
+}
+
+.waitingTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.waitingSub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  max-width: 320px;
+}
+

@@ -1,26 +1,32 @@
 # 🕶️ DELTA: Undercover
 
-A sleek, mobile-first social deduction word party game built with **React + Vite + CSS Modules**.
+The definitive social deduction party game built with **React + Vite + CSS Modules**.
 
-## 🎮 Game Concept
-In **DELTA: Undercover**, players are covert operatives connected in a circle on a single device.
-- **Civilians** receive Word A (e.g., *"Door"*).
-- **The Imposter** receives closely relatable Word B (e.g., *"Wardrobe"*).
-- Players give 1 short clue per turn.
-- A total countdown timer ticks down (1 min, 5 min, or 10 min). Once the timer hits 0:00, players are immediately sent to the Vote Out screen to eliminate the suspected imposter!
+## 🎮 Game Modes
 
-## 🚀 Quick Start
+### 1. 📱 LocalPlay (Pass & Play)
+- **1 Device**: Perfect for gatherings where one phone or laptop is passed in a circle.
+- **3-Step Setup Wizard**: Players $\to$ Imposters & Total Game Timer $\to$ Word Packs (230+ pairs).
+- **Privacy Cards**: Tap & hold secret reveal cards with instant hide-and-pass.
+- **Turn-based Clues & Auto-Voteout**: Configurable total timer (1 min, 5 min, 10 min) that automatically triggers the Vote Out screen at 0:00!
 
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Production build
-npm run build
-```
+### 2. 🌐 PartyPlay (Online Synchronized Room)
+- **Multi-Device Sync**: Host creates a 5-letter party room code (e.g. `VIPER`). Friends join on their own phones or computers with a simple link or code.
+- **Private Role Dispatch**: Each player's phone secretly displays their own word (*Civilian* vs *Imposter*).
+- **Turn-Enforced Live Clue Chatroom**:
+  - Live synced clue stream!
+  - **Strict Turn Lock**: *Only the operative whose turn it is can write and submit a clue!* Other players see who is speaking with an animated pulse.
+- **Post-Round Majority Decision**:
+  - After each full clue round, the squad votes:
+    - 🔄 **Another Clue Round** (need more clues)
+    - 🗳️ **Proceed to Vote Out** (ready to eliminate)
+  - Majority vote decides the path!
+- **3-Minute All-Operative Live Debate**:
+  - When proceeding to vote out, a synchronized **3:00 (180s)** countdown clock starts.
+  - The chatroom opens up for **free-for-all live debate**: argue, defend, and accuse suspects!
+- **Individual Secret Ballots**:
+  - Each player privately casts their vote on their own screen.
+  - Votes are tallied in real-time, majority suspect is eliminated, and roles are dramatically revealed!
 
 ---
 
@@ -36,10 +42,15 @@ Designed and developed by **DHRUV ITWALA**:
 
 ---
 
-## 🛠️ Stack & Engineering
-- **Framework**: React 18
-- **Tooling**: Vite
-- **Styling**: Pure CSS Modules (`*.module.css`) with pitch-black theme tokens
-- **Icons**: Lucide React (`lucide-react`)
-- **Sound Engine**: Public royalty-free SFX with Web Audio API synthesis fallback
-- **Effects**: Canvas Confetti
+## 🚀 Running the Game
+
+```bash
+# Install dependencies
+npm install
+
+# Run local development server
+npm run dev
+
+# Production build
+npm run build
+```

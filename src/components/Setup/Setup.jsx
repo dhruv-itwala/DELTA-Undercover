@@ -178,7 +178,7 @@ export default function Setup({ onStartGame }) {
       {currentStep === 1 && (
         <div className={styles.stepWrapper}>
           <div className={styles.stepHero}>
-            {/* <div className={styles.heroLogoWrap}>
+            {/* <div className={styles._heroSection_192vp_9}>
               <DeltaLogo variant="square" />
             </div> */}
             <span className={styles.stepBadge}>Step 1 of 3</span>

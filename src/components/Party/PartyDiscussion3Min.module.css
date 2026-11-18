@@ -1,0 +1,333 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideUpFade 0.3s ease-out;
+}
+
+.timerBanner {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.25s;
+}
+
+.timerUrgent {
+  border-color: var(--accent-rose);
+  background: rgba(244, 63, 94, 0.1);
+  box-shadow: 0 0 30px var(--accent-rose-glow);
+}
+
+.timerTop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.clockIcon {
+  color: var(--accent-cyan);
+}
+
+.clockIconUrgent {
+  color: var(--accent-rose);
+  animation: radarPulse 0.8s infinite;
+}
+
+.timerTitle {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.timeDigitDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeDigits {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+.timeDigitsUrgent {
+  color: var(--accent-rose);
+  animation: pulseScale 0.9s infinite alternate;
+}
+
+.timerSub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Tabs */
+.tabToggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  gap: 4px;
+}
+
+.tabBtn {
+  flex: 1;
+  padding: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.tabActive {
+  background: var(--bg-card-hover);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Chat Card */
+.chatCard {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  height: 340px;
+}
+
+.feedScroll {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.emptyPrompt {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.emptyIcon {
+  color: var(--accent-cyan);
+  opacity: 0.6;
+}
+
+.msgRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  animation: slideUpFade 0.2s ease-out;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.msgBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.msgSenderRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.msgSender {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.msgTime {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+.msgBubble {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  color: #fff;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.msgMine .msgBubble {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* Quick Chips */
+.chipsScroll {
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px;
+  overflow-x: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.chipBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.chipBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Chat Form */
+.chatForm {
+  display: flex;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(5, 6, 8, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chatInput {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 0.82rem;
+  outline: none;
+}
+
+.chatInput:focus {
+  border-color: var(--accent-cyan);
+}
+
+.sendBtn {
+  background: var(--accent-cyan);
+  color: #000;
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disabledBtn {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Clues Review Panel */
+.cluesReviewCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.cluesReviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clueHistoryItem {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg-card-inner);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xs);
+}
+
+.clueAuthor {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  white-space: nowrap;
+}
+
+.clueQuote {
+  font-size: 0.82rem;
+  color: #fff;
+  font-style: italic;
+}
+
+/* Skip CTA */
+.skipBtn {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.skipBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
