@@ -281,9 +281,11 @@ class PartyNetwork {
     }
   }
 
-  broadcast(message) {
+  broadcast(message, includeSelf = true) {
     // Host broadcasts to all clients
-    this.emitMessage(message);
+    if (includeSelf) {
+      this.emitMessage(message);
+    }
 
     const sentConns = new Set();
     // Send to mapped player connections

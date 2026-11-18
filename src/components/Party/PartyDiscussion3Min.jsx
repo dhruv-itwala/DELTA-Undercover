@@ -23,6 +23,8 @@ export default function PartyDiscussion3Min({
   discussionChatFeed,
   remainingSeconds,
   isHost,
+  typingUsers = {},
+  onTyping,
   onSendChatMessage,
   onTimeExpired,
   onSkipToVoteEarly
@@ -30,11 +32,20 @@ export default function PartyDiscussion3Min({
   const [chatInput, setChatInput] = useState('');
   const [showCluesTab, setShowCluesTab] = useState(false);
   const chatEndRef = useRef(null);
+  const typingTimerRef = useRef(null);
 
   // Auto-scroll chat
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [discussionChatFeed]);
+
+  // Cleanup typing on unmount
+  useEffect(() => {
+    return () => {
+      if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+      if (onTyping) onTyping(false);
+    };
+  }, []);
 
   // Tick sounds when close to zero
   useEffect(() => {
@@ -46,9 +57,30 @@ export default function PartyDiscussion3Min({
     }
   }, [remainingSeconds]);
 
+  const handleInputChange = (e) => {
+    const val = e.target.value;
+    setChatInput(val);
+
+    if (onTyping) {
+      if (val.trim().length > 0) {
+        onTyping(true);
+        if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+        typingTimerRef.current = setTimeout(() => {
+          onTyping(false);
+        }, 2500);
+      } else {
+        if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+        onTyping(false);
+      }
+    }
+  };
+
   const handleSend = (e) => {
     e.preventDefault();
     if (!chatInput.trim()) return;
+
+    if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+    if (onTyping) onTyping(false);
 
     sound.play('click');
     onSendChatMessage(chatInput.trim());
@@ -56,6 +88,8 @@ export default function PartyDiscussion3Min({
   };
 
   const handleQuickTag = (tag) => {
+    if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+    if (onTyping) onTyping(false);
     sound.play('click');
     onSendChatMessage(tag);
   };
@@ -63,6 +97,11 @@ export default function PartyDiscussion3Min({
   const minutes = Math.floor(remainingSeconds / 60);
   const seconds = remainingSeconds % 60;
   const isUrgent = remainingSeconds <= 30;
+
+  // Active typing players (excluding self)
+  const typingList = Object.entries(typingUsers || {})
+    .filter(([id]) => id !== myPlayerId)
+    .map(([, data]) => data.playerName);
 
   return (
     <div className={styles.container}>
@@ -145,6 +184,26 @@ export default function PartyDiscussion3Min({
             <div ref={chatEndRef} />
           </div>
 
+          {/* Real-time Typing Indicator Popup */}
+          {typingList.length > 0 && (
+            <div className={styles.typingIndicatorPopup}>
+              <div className={styles.typingDotWave}>
+                <span className={styles.dot} />
+                <span className={styles.dot} />
+                <span className={styles.dot} />
+              </div>
+              <span className={styles.typingLabel}>
+                {typingList.length === 1 ? (
+                  <><span className={styles.highlightName}>{typingList[0]}</span> is typing...</>
+                ) : typingList.length === 2 ? (
+                  <><span className={styles.highlightName}>{typingList[0]}</span> & <span className={styles.highlightName}>{typingList[1]}</span> are typing...</>
+                ) : (
+                  <>Several operatives are typing...</>
+                )}
+              </span>
+            </div>
+          )}
+
           {/* Quick Reaction Chips */}
           <div className={styles.chipsScroll}>
             {QUICK_TAGS.map((tag, i) => (
@@ -161,7 +220,8 @@ export default function PartyDiscussion3Min({
               placeholder="Debate, accuse, or defend yourself..."
               value={chatInput}
               maxLength={80}
-              onChange={(e) => setChatInput(e.target.value)}
+              onChange={handleInputChange}
+              onBlur={() => onTyping && onTyping(false)}
               className={styles.chatInput}
             />
             <button 

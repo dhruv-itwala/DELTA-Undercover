@@ -72,6 +72,7 @@ export default function App() {
   const [partyEliminatedModalData, setPartyEliminatedModalData] = useState(null);
   const [partyWinner, setPartyWinner] = useState(null);
   const [partyWordPair, setPartyWordPair] = useState({ civilian: '', imposter: '' });
+  const [partyTypingUsers, setPartyTypingUsers] = useState({}); // { [playerId]: { playerName, time } }
 
   // Refs for host state tracking
   const hostGameRef = useRef({
@@ -115,6 +116,26 @@ export default function App() {
     } catch {
       // Ignore
     }
+  }, []);
+
+  // Auto-expire typing indicators after 3 seconds of inactivity
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPartyTypingUsers(prev => {
+        const now = Date.now();
+        let changed = false;
+        const next = {};
+        for (const [id, data] of Object.entries(prev)) {
+          if (now - data.time < 3500) {
+            next[id] = data;
+          } else {
+            changed = true;
+          }
+        }
+        return changed ? next : prev;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   // --- PARTY NETWORK MESSAGE LISTENER ---
@@ -319,14 +340,54 @@ export default function App() {
               return [...prev, chatMsg];
             });
 
+            // Immediately clear sender's typing indicator
+            if (chatMsg.playerId) {
+              setPartyTypingUsers(prev => {
+                if (!prev[chatMsg.playerId]) return prev;
+                const next = { ...prev };
+                delete next[chatMsg.playerId];
+                return next;
+              });
+            }
+
             // CRITICAL SYNC FIX:
-            // When Host receives a chat message from ANY player,
+            // When Host receives a chat message from ANY guest,
             // Host immediately re-broadcasts it so all other members in the room see it!
-            if (partyNetwork.isHost) {
+            // Exclude self (includeSelf: false) and mark _relayed: true to prevent recursion.
+            if (partyNetwork.isHost && chatMsg.playerId !== myPlayerId && !msg._relayed) {
               partyNetwork.broadcast({
                 type: 'DISCUSSION_CHAT_MESSAGE',
-                chatMsg
-              });
+                chatMsg,
+                _relayed: true
+              }, false);
+            }
+          }
+          break;
+        }
+
+        // Typing Status Sync
+        case 'PLAYER_TYPING': {
+          const { playerId, playerName, isTyping } = msg;
+          if (playerId && playerId !== myPlayerId) {
+            setPartyTypingUsers(prev => {
+              const next = { ...prev };
+              if (isTyping) {
+                next[playerId] = { playerName, time: Date.now() };
+              } else {
+                delete next[playerId];
+              }
+              return next;
+            });
+
+            // Host relays typing notification to all other connected peers
+            if (partyNetwork.isHost && !msg._relayed) {
+              partyNetwork.broadcast({
+                type: 'PLAYER_TYPING',
+                playerId,
+                playerName,
+                isTyping,
+                _relayed: true
+              }, false);
             }
           }
           break;
@@ -674,6 +735,20 @@ export default function App() {
     });
   };
 
+  const handleSendTypingStatus = (isTyping) => {
+    const payload = {
+      type: 'PLAYER_TYPING',
+      playerId: myPlayerId,
+      playerName: myPlayerName,
+      isTyping
+    };
+    if (partyNetwork.isHost) {
+      partyNetwork.broadcast(payload, false);
+    } else {
+      partyNetwork.sendToHost(payload);
+    }
+  };
+
   const handleSendPartyChatMessage = (text) => {
     const cleanText = text.trim();
     if (!cleanText) return;
@@ -692,11 +767,14 @@ export default function App() {
       return [...prev, chatMsg];
     });
 
+    // Notify others that this player stopped typing
+    handleSendTypingStatus(false);
+
     if (partyNetwork.isHost) {
       partyNetwork.broadcast({
         type: 'DISCUSSION_CHAT_MESSAGE',
         chatMsg
-      });
+      }, false);
     } else {
       partyNetwork.sendToHost({
         type: 'DISCUSSION_CHAT_MESSAGE',
@@ -966,6 +1044,8 @@ export default function App() {
                 alivePlayers={connectedPlayers}
                 cluesFeed={cluesFeed}
                 myWord={myRoleData?.word}
+                typingUsers={partyTypingUsers}
+                onTyping={handleSendTypingStatus}
                 onSubmitClue={handleSubmitClue}
               />
             )}
@@ -992,6 +1072,8 @@ export default function App() {
                 discussionChatFeed={partyDiscussionChatFeed}
                 remainingSeconds={partyDiscussion3MinSeconds}
                 isHost={isHost}
+                typingUsers={partyTypingUsers}
+                onTyping={handleSendTypingStatus}
                 onSendChatMessage={handleSendPartyChatMessage}
                 onTimeExpired={() => {
                   if (partyNetwork.isHost) {

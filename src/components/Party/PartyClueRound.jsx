@@ -15,22 +15,55 @@ export default function PartyClueRound({
   alivePlayers,
   cluesFeed,
   myWord,
+  typingUsers = {},
+  onTyping,
   onSubmitClue
 }) {
   const [clueText, setClueText] = useState('');
   const chatEndRef = useRef(null);
+  const typingTimerRef = useRef(null);
 
   const currentTurnPlayer = alivePlayers.find(p => p.id === currentTurnPlayerId);
   const isMyTurn = myPlayerId === currentTurnPlayerId;
+  const isCurrentTurnPlayerTyping = Boolean(currentTurnPlayerId && typingUsers[currentTurnPlayerId]);
 
   // Auto-scroll chat to latest message
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [cluesFeed]);
 
+  // Cleanup typing timer on unmount
+  useEffect(() => {
+    return () => {
+      if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+      if (onTyping) onTyping(false);
+    };
+  }, []);
+
+  const handleInputChange = (e) => {
+    const val = e.target.value;
+    setClueText(val);
+
+    if (onTyping && isMyTurn) {
+      if (val.trim().length > 0) {
+        onTyping(true);
+        if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+        typingTimerRef.current = setTimeout(() => {
+          onTyping(false);
+        }, 2500);
+      } else {
+        if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+        onTyping(false);
+      }
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isMyTurn || !clueText.trim()) return;
+
+    if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+    if (onTyping) onTyping(false);
 
     sound.play('click');
     onSubmitClue(clueText.trim());
@@ -117,7 +150,8 @@ export default function PartyClueRound({
                 placeholder="Type your one-sentence clue..."
                 value={clueText}
                 maxLength={60}
-                onChange={(e) => setClueText(e.target.value)}
+                onChange={handleInputChange}
+                onBlur={() => onTyping && onTyping(false)}
                 autoFocus
               />
               <button 
@@ -130,10 +164,14 @@ export default function PartyClueRound({
               </button>
             </form>
           ) : (
-            <div className={styles.lockedBar}>
+            <div className={`${styles.lockedBar} ${isCurrentTurnPlayerTyping ? styles.lockedBarTyping : ''}`}>
               <Lock size={15} className={styles.lockIcon} />
               <span className={styles.lockedText}>
-                Waiting for <strong>{currentTurnPlayer?.name}</strong> to give their clue...
+                {isCurrentTurnPlayerTyping ? (
+                  <><strong>{currentTurnPlayer?.name}</strong> is drafting clue...</>
+                ) : (
+                  <>Waiting for <strong>{currentTurnPlayer?.name}</strong> to give their clue...</>
+                )}
               </span>
             </div>
           )}
